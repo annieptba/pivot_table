@@ -13,7 +13,7 @@ df = pd.read_csv('https://bit.ly/elements-periodic-table')
 unique_col = ["AtomicNumber", "Element", "Symbol", "NumberOfProtons", "NumberOfElectrons"]
 
 # create columns that don't have unique values
-not_unique_col = ['AtomicMass', 'NumberOfNeutrons', 'Period', 'Group', 'Phase', 'Radioactive', 'Natural', 'Metal', 'Nonmetal', 
+not_unique_col = ['AtomicMass', 'NumberOfNeutrons', 'Period', 'Group', 'Phase', 'Radioactive', 'Natural', 'Metal', 'Nonmetal',
                   'Metalloid', 'Type', 'AtomicRadius', 'Electronegativity', 'FirstIonization', 'Density', 'MeltingPoint',
                   'BoilingPoint', 'NumberOfIsotopes', 'Discoverer', 'Year', 'SpecificHeat', 'NumberOfShells', 'NumberOfValence']
 
@@ -24,15 +24,15 @@ app.layout = html.Div([
    html.Div([
       dcc.Dropdown(
       id='index_selection',
-      options=[{'label': 'select an index', 'value': col} for col in unique_col],
+      options=[{'label': col, 'value': col} for col in unique_col],
       value=None
       )
-   ]), 
+   ]),
    html.Div(id='index-output'),
    html.Div([
       dcc.Dropdown(
       id='column_selection',
-      options=[{'label': 'select a colum', 'value': col} for col in unique_col],
+      options=[{'label': col, 'value': col} for col in unique_col],
       value=None
       )
    ]),
@@ -40,7 +40,7 @@ app.layout = html.Div([
    html.Div([
       dcc.Dropdown(
       id='value_selection',
-      options=[{'label': 'select a value', 'value': col} for col in not_unique_col],
+      options=[{'label': col, 'value': col} for col in not_unique_col],
       value=None
       )
    ]),
@@ -75,12 +75,12 @@ def output_table(df, index_col, columns_col, values_col):
    else:
       df_piv = df.pivot_table(
             index= index_col,
-            columns= columns_col, 
+            columns= columns_col,
             values= values_col,
             aggfunc=identity,
       )
       return df_piv
 
-# run app 
+# run app
 app.run_server(debug=True, host="0.0.0.0")
 
