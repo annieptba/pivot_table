@@ -1,0 +1,5 @@
+ports:
+- port: 8051
+  onOpen: open-preview
+tasks:
+- init: /workspace/pivot_table/run.sh
